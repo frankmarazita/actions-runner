@@ -1,0 +1,12 @@
+# Example workflow for running a GitHub Actions self-hosted runner in a Docker container
+# Set the GITHUB_TOKEN environment variable to a personal access token with repo, workflow, write:packages permissions
+
+services:
+  actions-runner:
+    image: ghcr.io/frankmarazita/actions-runner:latest
+    container_name: actions-runner
+    network_mode: host
+    environment:
+      REPO: frankmarazita/timespeaker
+      TOKEN: ${GITHUB_TOKEN}
+    restart: unless-stopped
